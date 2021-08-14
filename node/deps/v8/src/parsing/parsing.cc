@@ -17,6 +17,10 @@
 #include "src/parsing/scanner-character-streams.h"
 #include "src/zone/zone-list-inl.h"  // crbug.com/v8/8816
 
+#include <iostream>
+#include <string>
+#include <stdio.h>
+
 namespace v8 {
 namespace internal {
 namespace parsing {
@@ -40,6 +44,8 @@ void MaybeReportErrorsAndStatistics(ParseInfo* info, Handle<Script> script,
 bool ParseProgram(ParseInfo* info, Handle<Script> script,
                   MaybeHandle<ScopeInfo> maybe_outer_scope_info,
                   Isolate* isolate, ReportStatisticsMode mode) {
+
+  std::cout << "ParseProgram IN V8" << std::endl;
   DCHECK(info->flags().is_toplevel());
   DCHECK_NULL(info->literal());
 
@@ -68,6 +74,7 @@ bool ParseProgram(ParseInfo* info, Handle<Script> script, Isolate* isolate,
 
 bool ParseFunction(ParseInfo* info, Handle<SharedFunctionInfo> shared_info,
                    Isolate* isolate, ReportStatisticsMode mode) {
+  std::cout << "ParseFunction IN V8" << std::endl;
   DCHECK(!info->flags().is_toplevel());
   DCHECK(!shared_info.is_null());
   DCHECK_NULL(info->literal());
@@ -94,6 +101,7 @@ bool ParseFunction(ParseInfo* info, Handle<SharedFunctionInfo> shared_info,
 
 bool ParseAny(ParseInfo* info, Handle<SharedFunctionInfo> shared_info,
               Isolate* isolate, ReportStatisticsMode mode) {
+  std::cout << "ParseAny IN V8" << std::endl;
   DCHECK(!shared_info.is_null());
   if (info->flags().is_toplevel()) {
     MaybeHandle<ScopeInfo> maybe_outer_scope_info;
